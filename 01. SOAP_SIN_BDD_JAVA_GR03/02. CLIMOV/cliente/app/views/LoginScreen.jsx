@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { View, TextInput, Button, Text, StyleSheet, Image } from "react-native";
-import { login } from "../controllers/LoginController";
 import { useRouter } from "expo-router";
+import React, { useState } from "react";
+import { Button, Image, StyleSheet, Text, TextInput, View } from "react-native";
+import { login } from "../controllers/LoginController";
 
 export default function LoginScreen() {
   const [username, setUsername] = useState("");
@@ -12,7 +12,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     try {
       const result = await login(username, password);
-      if (true) {
+      if (result) {
         router.push("/views/MenuScreen");
       } else {
         setError("Credenciales incorrectas.");
