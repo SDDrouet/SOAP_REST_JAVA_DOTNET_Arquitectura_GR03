@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { XMLParser } from 'fast-xml-parser';
 
-const SOAP_URL = 'http://10.40.13.34:8080/ConUni_Soap_Java_GR03/ConversionUnidades?wsdl';
+const SOAP_URL = 'http://192.168.1.30:8080/ConUni_Soap_Java_GR03/ConversionUnidades?wsdl';
 
 // Función auxiliar para crear el envelope SOAP
 const createSoapEnvelope = (body) => `
