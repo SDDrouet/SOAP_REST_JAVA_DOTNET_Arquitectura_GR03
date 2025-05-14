@@ -1,0 +1,134 @@
+﻿@page
+@model _02._CLIWEB.Pages.ConvertirModel
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    body {
+        background-image: url('/images/fondo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-color: #6BBBE1;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+    }
+
+    .form-wrapper {
+        position: absolute;
+        bottom: 80px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(255, 255, 255, 0.96);
+        border-radius: 20px;
+        padding: 30px 40px;
+        max-width: 350px;
+        width: 90%;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+
+        .form-wrapper h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+    .btn-convertir {
+        background-color: #f57c00;
+        border: none;
+        width: 100%;
+        font-weight: bold;
+    }
+
+        .btn-convertir:hover {
+            background-color: #ef6c00;
+        }
+
+    .alert-danger, .alert-success {
+        font-size: 0.95rem;
+        margin-top: 1rem;
+    }
+</style>
+
+<div class="form-wrapper">
+    <h2>Conversión de Unidades</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+
+    <form method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label for="valor" class="form-label">Valor</label>
+            <input type="text" class="form-control" id="valor" name="RequestData.valor" required pattern="^-?[0-9]+(\.[0-9]+)?$" />
+            <div class="invalid-feedback">
+                Ingrese un número válido.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="origen" class="form-label">Unidad de origen</label>
+            <select class="form-select" id="origen" name="RequestData.origen" required>
+                <option value="">Seleccione...</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+                <option value="K">Kelvin</option>
+            </select>
+            <div class="invalid-feedback">
+                Seleccione una unidad de origen.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="destino" class="form-label">Unidad de destino</label>
+            <select class="form-select" id="destino" name="RequestData.destino" required>
+                <option value="">Seleccione...</option>
+                <option value="C">Celsius</option>
+                <option value="F">Fahrenheit</option>
+                <option value="K">Kelvin</option>
+            </select>
+            <div class="invalid-feedback">
+                Seleccione una unidad de destino.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-convertir">Convertir</button>
+    </form>
+
+@if (!string.IsNullOrWhiteSpace(Model.ResultadoMensaje))
+{
+    var tipoMensaje = Model.ResultadoMensaje.StartsWith("❌") || Model.ResultadoMensaje.StartsWith("⚠️")
+        ? "alert-danger"
+        : "alert-success";
+
+    <div class="alert @tipoMensaje mt-3">
+        <pre>@Model.ResultadoMensaje</pre>
+    </div>
+}
+
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.forEach.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="_02._CLIMOV.ec.edu.monster.vista.ConversionPage"
+             Title="Conversión de Temperatura">
+
+    <Grid>
+
+        <!-- Imagen de fondo -->
+        <Image Source="fondo_conversion.png"
+               Aspect="AspectFill"
+               Opacity="0.5"
+               IsEnabled="False" />
+
+        <!-- Contenido principal -->
+        <ScrollView>
+            <VerticalStackLayout Padding="30" Spacing="20">
+
+                <!-- Título principal -->
+                <Frame BackgroundColor="#faa38e"
+                       CornerRadius="8"
+                       Padding="10"
+                       HasShadow="False"
+                       HorizontalOptions="Center">
+                    <Label Text="Convertir Temperatura"
+                           FontSize="24"
+                           HorizontalOptions="Center"
+                           TextColor="#007BA7"
+                           FontAttributes="Bold">
+                        <Label.Shadow>
+                            <Shadow Brush="Black" Offset="1,1" Radius="2" Opacity="0.4" />
+                        </Label.Shadow>
+                    </Label>
+                </Frame>
+
+
+                <Entry x:Name="entryValor"
+                   Placeholder="Ingrese el valor numérico"
+                   Keyboard="Numeric"
+                   MaxLength="5"
+                   BackgroundColor="#FFFFFF"
+                   TextColor="#333"
+                   HeightRequest="45"
+                   Margin="0,10" />
+
+                <Frame BackgroundColor="#faa38e"
+                       CornerRadius="6"
+                       Padding="5"
+                       HasShadow="False">
+                    <Label Text="Unidad de origen"
+                           TextColor="#007BA7"
+                           FontAttributes="Bold">
+                        <Label.Shadow>
+                            <Shadow Brush="Black" Offset="1,1" Radius="2" Opacity="0.4" />
+                        </Label.Shadow>
+                    </Label>
+                </Frame>
+
+                <Picker x:Name="pickerOrigen"
+                        Title="Seleccionar unidad de origen"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="#333"
+                        HeightRequest="45">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Celsius (°C)</x:String>
+                            <x:String>Fahrenheit (°F)</x:String>
+                            <x:String>Kelvin (K)</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+                <Frame BackgroundColor="#faa38e"
+                       CornerRadius="6"
+                       Padding="5"
+                       HasShadow="False">
+                    <Label Text="Unidad de destino"
+                           TextColor="#007BA7"
+                           FontAttributes="Bold">
+                        <Label.Shadow>
+                            <Shadow Brush="Black" Offset="1,1" Radius="2" Opacity="0.4" />
+                        </Label.Shadow>
+                    </Label>
+                </Frame>
+
+                <Picker x:Name="pickerDestino"
+                        Title="Seleccionar unidad de destino"
+                        BackgroundColor="#FFFFFF"
+                        TextColor="#333"
+                        HeightRequest="45">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Celsius (°C)</x:String>
+                            <x:String>Fahrenheit (°F)</x:String>
+                            <x:String>Kelvin (K)</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+
+
+                <Button Text="Convertir"
+                        Clicked="OnConvertirClicked"
+                        BackgroundColor="#4DD0E1"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="50" />
+
+                <Frame BackgroundColor="White"
+                       CornerRadius="10"
+                       Padding="15"
+                       HasShadow="True"
+                       IsVisible="True">
+                       <Label x:Name="lblResultado"
+                           Text="Resultado aquí"
+                           FontSize="16"
+                           TextColor="#007BA7"
+                           HorizontalTextAlignment="Center"
+                           VerticalTextAlignment="Center"
+                           FontAttributes="Italic" />
+                </Frame>
+
+
+                <!-- Botón de salir -->
+                <Button Text="Salir"
+                        Clicked="OnSalirClicked"
+                        BackgroundColor="#B2EBF2"
+                        TextColor="#007BA7"
+                        FontAttributes="Bold"
+                        CornerRadius="10"
+                        HeightRequest="45" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>
