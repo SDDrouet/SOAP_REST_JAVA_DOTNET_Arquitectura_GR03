@@ -175,3 +175,12 @@ artifacts/
 out/
 
 # FIN
+/03. REST_SIN_BDD_JAVA_GR03/01. SERVIDOR/ConUni_Rest_Java_GR03/nbproject/private/
+/03. REST_SIN_BDD_JAVA_GR03/01. SERVIDOR/ConUni_Rest_Java_GR03/build/
+/01. SOAP_SIN_BDD_JAVA_GR03/01. SERVIDOR/ConUni_Soap_Java_GR03/build/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLICON/ConUni_Rest_Consola/nbproject/private/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLICON/ConUni_Rest_Consola_GR03/nbproject/private/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLICON/ConUni_Rest_Consola_GR03/build/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLICON/cliente/target/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLIESC/ConUni_Rest_Escritorio_GR03/nbproject/private/
+/03. REST_SIN_BDD_JAVA_GR03/02. CLIESC/ConUni_Rest_Escritorio_GR03/build/
