@@ -17,26 +17,9 @@ namespace _02._CLIESC.ec.edu.monster.vista
             InitializeComponent();
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void LoginVista_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void btnAcceder_Click(object sender, EventArgs e)
-        {
-            String getUsuario = txtUsuario.Text;
-            String getContrasena = txtContrasena.Text;
-
-            if (getUsuario.Equals("MONSTER") && getContrasena.Equals("MONSTER9"))
-            {
-                ConvertirVista convertirVista = new ConvertirVista();
-                convertirVista.Show();
-                this.Hide();
-            }
-            else
-            {
-                MessageBox.Show("Usuario o contraseña incorrectos");
-            }
         }
     }
 }

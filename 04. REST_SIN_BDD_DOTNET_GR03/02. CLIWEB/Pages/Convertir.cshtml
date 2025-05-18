@@ -1,0 +1,271 @@
+﻿@page
+@model _02._CLIWEB.Pages.ConvertirModel
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    :root {
+        --primary: #5b86e5;
+        --secondary: #6c757d;
+        --accent: #ff9966;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --success: #28a745;
+        --danger: #dc3545;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    body {
+        background-image: url('/images/fondo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center bottom;
+        background-color: #6BBBE1;
+        font-family: 'Segoe UI', sans-serif;
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 0;
+    }
+
+    .container-fluid {
+        max-width: 1200px;
+    }
+
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        padding: 1rem;
+    }
+
+    .card {
+        background-color: rgba(255, 255, 255, 0.95);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        width: 100%;
+        max-width: 450px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+    .card-header {
+        background: linear-gradient(45deg, var(--accent), #ff7e5f);
+        color: white;
+        font-weight: 600;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+        .card-header h2 {
+            margin: 0;
+            font-size: 1.75rem;
+        }
+
+    .card-body {
+        padding: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--dark);
+    }
+
+    .form-control, .form-select {
+        border-radius: 10px;
+        padding: 0.75rem 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(91, 134, 229, 0.25);
+            border-color: var(--primary);
+        }
+
+    .btn-convertir {
+        background: linear-gradient(45deg, var(--accent), #ff7e5f);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .btn-convertir:hover {
+            background: linear-gradient(45deg, #ff7e5f, var(--accent));
+            transform: translateY(-2px);
+        }
+
+        .btn-convertir:active {
+            transform: translateY(0);
+        }
+
+    .btn-salir {
+        background-color: var(--secondary);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 10px;
+        font-weight: 600;
+        width: 100%;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .btn-salir:hover {
+            background-color: #5a6268;
+            transform: translateY(-2px);
+        }
+
+    .alert-success {
+        background-color: rgba(40, 167, 69, 0.15);
+        border-left: 4px solid var(--success);
+        color: #155724;
+    }
+
+    .alert-danger {
+        background-color: rgba(220, 53, 69, 0.15);
+        border-left: 4px solid var(--danger);
+        color: #721c24;
+    }
+
+    .result-card pre {
+        white-space: pre-wrap;
+        margin: 0;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    @@media (max-width: 768px) {
+        .card-body {
+            padding: 1.5rem;
+        }
+    }
+
+    @@keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 0.4s ease forwards;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="page-container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Conversión de Temperatura</h2>
+            </div>
+            <div class="card-body">
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="alert alert-danger animate-fade-in p-3 mb-4">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+
+                <form method="post" class="needs-validation" novalidate>
+                    <div class="form-group">
+                        <label for="valor" class="form-label">Valor</label>
+                        <input type="text" class="form-control" id="valor" name="RequestData.valor" required pattern="^-?[0-9]+(\.[0-9]+)?$" placeholder="Ingrese el valor a convertir" />
+                        <div class="invalid-feedback">Ingrese un número válido.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="origen" class="form-label">Unidad de origen</label>
+                        <select class="form-select" id="origen" name="RequestData.origen" required>
+                            <option value="">Seleccione...</option>
+                            <option value="C">Celsius (°C)</option>
+                            <option value="F">Fahrenheit (°F)</option>
+                            <option value="K">Kelvin (K)</option>
+                        </select>
+                        <div class="invalid-feedback">Seleccione una unidad de origen.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="destino" class="form-label">Unidad de destino</label>
+                        <select class="form-select" id="destino" name="RequestData.destino" required>
+                            <option value="">Seleccione...</option>
+                            <option value="C">Celsius (°C)</option>
+                            <option value="F">Fahrenheit (°F)</option>
+                            <option value="K">Kelvin (K)</option>
+                        </select>
+                        <div class="invalid-feedback">Seleccione una unidad de destino.</div>
+                    </div>
+
+                    <button type="submit" class="btn btn-convertir">
+                        <i class="fas fa-exchange-alt me-2"></i>Convertir
+                    </button>
+                </form>
+
+                <!-- Botón de salir -->
+                <form method="get" asp-page="/Acceder">
+                    <button type="submit" class="btn btn-salir">
+                        <i class="fas fa-sign-out-alt me-2"></i>Salir
+                    </button>
+                </form>
+
+                @if (!string.IsNullOrWhiteSpace(Model.ResultadoMensaje))
+                {
+                    var tipoMensaje = Model.ResultadoMensaje.StartsWith("❌") || Model.ResultadoMensaje.StartsWith("⚠️")
+                    ? "alert-danger"
+                    : "alert-success";
+
+                    <div class="alert @tipoMensaje mt-4 p-3 result-card animate-fade-in">
+                        <pre>@Model.ResultadoMensaje</pre>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            const forms = document.getElementsByClassName('needs-validation');
+            Array.prototype.forEach.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
